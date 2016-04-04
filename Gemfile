@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rake', '~> 10.3.2'
 
-gem 'unicorn', '~> 4.8.3'
+gem 'thin'
 gem 'sinatra', '~> 1.4.5', require: 'sinatra/base'
 gem 'sinatra-contrib', '~> 1.4.2', require: 'sinatra/reloader'
 
