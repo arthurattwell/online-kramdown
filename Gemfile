@@ -15,7 +15,7 @@ group :test do
 end
 
 # Windows workaround https://github.com/eventmachine/eventmachine/issues/820
-gem 'eventmachine', '1.2.7', git: 'git@github.com:eventmachine/eventmachine', tag: 'v1.2.7'
+gem 'eventmachine', '1.2.7', git: 'git@github.com:eventmachine/eventmachine', tag: 'v1.2.7' if Gem.win_platform?
 
 # group :development do
 #   gem 'foreman'
