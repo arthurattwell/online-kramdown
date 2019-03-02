@@ -26,7 +26,6 @@
     'HTML that gets displayed on the right.',
   ].join('\n');
 
-
   var $openMd   = $('#open-md-link');
   var $saveMd   = $('#save-md-link');
   var $saveHtml = $('#save-html-link');
@@ -122,6 +121,43 @@
 
   var loadStyles = function () {
     return localStorage && localStorage.styles || DEFAULT_STYLES;
+  };
+
+  // Scripts.
+
+  var injectMathJax = function () {
+      var iframe = document.querySelector('#preview-contents').contentDocument;
+
+      // Add MathJax config
+      var mathjaxConfig = iframe.createElement('script');
+      mathjaxConfig.id = 'mathjaxConfig';
+      mathjaxConfig.setAttribute('type', 'text/x-mathjax-config');
+      iframe.head.appendChild(mathjaxConfig);
+
+      // For some reason we need to get this over XHR,
+      // because linking to the config file as src doesn't work.
+      var getMathJaxConfig = (function(){
+        var xhr = [];
+        var files = ['mathjax/MathJax-config.js'];
+        var i;
+        for (i = 0; i < files.length; i += 1) {
+          xhr = new XMLHttpRequest();
+          xhr.open("GET", files[i]);
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              mathjaxConfig.innerHTML += xhr.responseText;
+            }
+          };
+          xhr.send();
+        }
+
+        // Once the config has loaded, add MathJax itself
+        var mathjax = iframe.createElement('script');
+        mathjax.id = 'mathjax';
+        mathjax.setAttribute('src', 'mathjax/MathJax.js');
+        iframe.head.appendChild(mathjax);
+      })();
+
   };
 
   // Editor.
@@ -265,6 +301,7 @@
       .append('<style id="styles"/>');
 
     injectNormalize();
+    injectMathJax();
   };
 
   var initializeTooltips = function () {
