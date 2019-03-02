@@ -1,7 +1,6 @@
-# Online Kramdown Editor [![Build Status](https://img.shields.io/travis/unindented/online-kramdown-sinatra.svg)](http://travis-ci.org/unindented/online-kramdown-sinatra) [![Dependency Status](https://img.shields.io/gemnasium/unindented/online-kramdown-sinatra.svg)](https://gemnasium.com/unindented/online-kramdown-sinatra) ![Abandoned](https://img.shields.io/badge/status-abandoned-red.svg)
+# Online Kramdown Editor
 
-A version of @unindented's [Kramdown](http://kramdown.gettalong.org/) editor that runs on Windows.
-
+A version of @unindented's [Kramdown](http://kramdown.gettalong.org/) editor that runs on Windows and supports MathJax.
 
 ## Installing
 
@@ -47,15 +46,7 @@ git push heroku master
 And the app will be ready to go!
 
 
-## Meta
 
-* Code: `git clone git://github.com/unindented/online-kramdown-sinatra.git`
-* Home: <https://github.com/unindented/online-kramdown-sinatra/>
+## Credits
 
-## Contributors
-
-Daniel Perez Alvarez ([unindented@gmail.com](mailto:unindented@gmail.com))
-
-## License
-
-Copyright (c) 2014 Daniel Perez Alvarez ([unindented.org](https://unindented.org/)). This is free software, and may be redistributed under the terms specified in the LICENSE file.
+Thanks to Daniel Perez Alvarez ([unindented@gmail.com](mailto:unindented@gmail.com)) for the original project.
