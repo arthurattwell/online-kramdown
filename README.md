@@ -1,6 +1,6 @@
 # Online Kramdown Editor
 
-A version of @unindented's [Kramdown](http://kramdown.gettalong.org/) editor that runs on Windows and supports MathJax.
+A version of @unindented's [Kramdown](http://kramdown.gettalong.org/) editor that runs on Windows, supports MathJax, and uses CodeMirror for its editor.
 
 ## Installing
 
