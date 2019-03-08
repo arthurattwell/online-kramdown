@@ -337,6 +337,9 @@
       .append('<style id="normalize"/>')
       .append('<style id="styles"/>');
 
+    $preview.find('body')
+      .addClass('online-kramdown-preview');
+
     injectNormalize();
     injectMathJax();
   };
