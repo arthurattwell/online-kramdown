@@ -13,7 +13,8 @@
 
 /* Editor and preview panes. */
 
-#editor-contents, #preview-contents {
+#editor-contents, #preview-contents,
+.CodeMirror.cm-s-default {
   border: 0 none;
 
   position: absolute;
