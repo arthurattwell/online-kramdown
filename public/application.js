@@ -220,18 +220,29 @@
     });
   };
 
+  var filename = function () {
+      'use strict';
+      var source = document.getElementById('preview-contents').contentDocument;
+      var text = source.querySelector('h1, h2, h3, h4, h5, h6, p');
+      if (text && text.innerText) {
+        return text.innerText;
+      } else {
+        return 'index';
+      }
+  }
+
   var onSaveMdClick = function (evt) {
     evt.preventDefault();
 
     var editor = $editor.val();
-    saveData(editor, 'index.md');
+    saveData(editor, filename() + '.md');
   };
 
   var onSaveHtmlClick = function (evt) {
     evt.preventDefault();
 
     var preview = $preview.find('html').get(0).outerHTML;
-    saveData(preview, 'index.html');
+    saveData(preview, filename() + '.html');
   };
 
   var onOptionsChange = function (evt) {
