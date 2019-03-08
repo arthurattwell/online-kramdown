@@ -1,6 +1,21 @@
 (function (window, _, $) {
   'use strict';
 
+  // Replace textarea with CodeMirror editor
+
+  var editorContents = document.getElementById('editor-contents');
+  var codemirrorEditor = CodeMirror(function (elt) {
+    editorContents.parentNode.replaceChild(elt, editorContents);
+  }, {
+    value: editorContents.value,
+    lineNumbers: true,
+    lineWrapping: true,
+    matchBrackets: true,
+    spellcheck: true
+  });
+
+  // Set defaults
+
   var DEFAULT_OPTIONS = {
     auto_ids:       true,
     enable_coderay: true
@@ -31,7 +46,8 @@
   var $saveHtml = $('#save-html-link');
   var $options  = $('#options-form');
   var $styles   = $('#styles-contents');
-  var $editor   = $('#editor-contents');
+  // var $editor   = $('#editor-contents');
+  var $editor   = $('.CodeMirror').first();
   var $preview  = $('#preview-contents').contents();
   var $tooltips = $('[data-toggle="tooltip"]');
 
@@ -232,7 +248,8 @@
   };
 
   var onEditorInput = function () {
-    var editor = $editor.val();
+    // var editor = $editor.val();
+    var editor = codemirrorEditor.getValue();
     saveEditor(editor);
 
     var data = {
@@ -290,6 +307,7 @@
       .on('input', _.debounce(onEditorInput, 500))
       .val(editor)
       .trigger('input');
+
   };
 
   var initializePreview = function () {
