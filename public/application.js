@@ -1,19 +1,6 @@
 (function (window, _, $) {
   'use strict';
 
-  // Replace textarea with CodeMirror editor
-
-  var editorContents = document.getElementById('editor-contents');
-  var codemirrorEditor = CodeMirror(function (elt) {
-    editorContents.parentNode.replaceChild(elt, editorContents);
-  }, {
-    value: editorContents.value,
-    lineNumbers: true,
-    lineWrapping: true,
-    matchBrackets: true,
-    spellcheck: true
-  });
-
   // Set defaults
 
   var DEFAULT_OPTIONS = {
@@ -40,6 +27,21 @@
     'editor. Whatever Markdown text you write here gets transformed into',
     'HTML that gets displayed on the right.',
   ].join('\n');
+
+  // Replace textarea with CodeMirror editor
+
+  var editorContents = document.getElementById('editor-contents');
+  var codemirrorEditor = CodeMirror(function (elt) {
+    editorContents.parentNode.replaceChild(elt, editorContents);
+  }, {
+    value: editorContents.value,
+    lineNumbers: true,
+    lineWrapping: true,
+    matchBrackets: true,
+    spellcheck: true
+  });
+
+  // Find elements on page
 
   var $openMd   = $('#open-md-link');
   var $saveMd   = $('#save-md-link');
@@ -220,18 +222,30 @@
     });
   };
 
+  var filename = function () {
+      'use strict';
+      var source = document.getElementById('preview-contents').contentDocument;
+      var text = source.querySelector('h1, h2, h3, h4, h5, h6, p');
+      if (text && text.innerText) {
+        return text.innerText;
+      } else {
+        return 'index';
+      }
+  }
+
   var onSaveMdClick = function (evt) {
     evt.preventDefault();
 
-    var editor = $editor.val();
-    saveData(editor, 'index.md');
+    // var editor = $editor.val();
+    var editor = codemirrorEditor.getValue();
+    saveData(editor, filename() + '.md');
   };
 
   var onSaveHtmlClick = function (evt) {
     evt.preventDefault();
 
     var preview = $preview.find('html').get(0).outerHTML;
-    saveData(preview, 'index.html');
+    saveData(preview, filename() + '.html');
   };
 
   var onOptionsChange = function (evt) {
@@ -307,6 +321,11 @@
       .on('input', _.debounce(onEditorInput, 500))
       .val(editor)
       .trigger('input');
+
+    // Add default value from CodeMirror editor
+    if (localStorage) {
+      codemirrorEditor.getDoc().setValue(editor);
+    }
 
   };
 
