@@ -216,9 +216,10 @@
     evt.preventDefault();
 
     readData('.md', function (data) {
-      $editor
-        .val(data)
-        .trigger('input');
+      // $editor
+      //   .val(data)
+      //   .trigger('input');
+      var editor = codemirrorEditor.getDoc().setValue(data);
     });
   };
 
