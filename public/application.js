@@ -323,6 +323,12 @@
       .val(editor)
       .trigger('input');
 
+    // Also trigger on keyup, to catch backspace events
+    $editor
+      .on('keyup', _.debounce(onEditorInput, 500))
+      .val(editor)
+      .trigger('input');
+
     // Add default value from CodeMirror editor
     if (localStorage) {
       codemirrorEditor.getDoc().setValue(editor);
