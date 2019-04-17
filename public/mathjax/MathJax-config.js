@@ -52,7 +52,6 @@ function typesetMaths(element) {
 var observer = new MutationObserver(function (mutations) {
     'use strict';
     mutations.forEach(function (mutation) {
-        console.log(mutation);
         typesetMaths(document.body);
     });
 });
